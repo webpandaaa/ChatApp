@@ -1,0 +1,20 @@
+.maincnt{
+    background-color: #f4f5f8;
+    height: 90vh;
+    width: 90vw;
+    display: flex;
+    border-radius: 20px;
+}
+
+
+.sidebar{
+    /* background-color: red; */
+    flex: 0.3;
+
+}
+
+.workarea{
+    /* background-color: blue; */
+    flex: 0.7;
+
+}
