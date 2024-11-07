@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './mystyle.css';
 import Sidebar from './Sidebar';
-import WorkArea from './WorkArea';
+import Chatarea from './Chatarea';
+
+
 
 const MainContainer = () => {
+
+  const [header , setHeader] = useState([
+    {
+      name : "ankush",
+      timestamp : "today",
+    },
+
+  ])
+
   return (
     <div className='maincnt'>
       <Sidebar/>
-      <WorkArea/>
+      <Chatarea props={header}/>
     </div>
   )
 }

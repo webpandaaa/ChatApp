@@ -8,13 +8,214 @@
 
 
 .sidebar{
-    /* background-color: red; */
     flex: 0.3;
+    display: flex;
+    flex-direction: column;
+    /* padding: 10px; */
 
 }
 
-.workarea{
-    /* background-color: blue; */
+.sb-header{
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 30px;
+    margin: 10px;
+    justify-content: space-between;
+}
+
+.sb-search{
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px;
+    align-items: center;
+}
+
+.sb-searchbox{
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+.sb-conversations{
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 20px;
+    margin: 10px;
+    flex: 1;
+}
+
+.conversation-cnt {
+    display: grid;
+    grid-template-columns: 48px auto;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  
+  .conversation-cnt:hover {
+    background-color: #d9d9d9;
+    cursor: pointer;
+  }
+  
+  
+  .con-icon {
+    grid-area: 1/1/3/2;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-color: #d9d9d9;
+  
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    font-weight: bolder;
+    color: white;
+    height: 48px;
+    width: 48px;
+    padding: 2px;
+  
+    border-radius: 50%;
+    justify-self: center;
+    align-self: center;
+    margin-left: 10px;
+    margin-right: 5px;
+  }
+  
+  .con-title {
+    grid-area: 1/2/2/4;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.54);
+    text-transform: capitalize;
+  }
+
+  .con-timeStamp {
+    justify-self: flex-end;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .con-lastMessage {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.75rem;
+    font-weight: lighter;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+
+.chatArea-cnt{
     flex: 0.7;
-
+    display: flex;
+    flex-direction: column;
 }
+
+.chatArea-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    padding: 10px 10px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.header-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+
+.message-container{
+    flex: 1;
+    background-color: white;
+    padding: 10px 10px;
+    margin: 10px;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+.message-container::-webkit-scrollbar{
+    display: none;
+}
+
+
+
+.self-msg-cnt{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.msgother-cnt .conversation-cnt:hover
+{
+  background-color: white;
+  cursor:auto;
+}
+
+
+.other-text-content {
+    background-color: #d9d9d9;
+    padding: 10px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    width: max-content;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .other-text-content .con-timeStamp{
+    align-self: flex-end;
+  }
+  
+  .self-msg-cnt {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .self-timeStamp{
+    align-self: flex-end;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  
+  .msgbox {
+    display: flex;
+    flex-direction: column;
+    background-color: #63d7b0;
+    width: max-content;
+    padding: 10px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+
+.text-input-area{
+    background-color: white;
+    padding: 10px 10px;
+    margin: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputarea{
+    border: none;
+    outline: none;
+    width: 100%;
+    padding-left: 20px;
+}
+
