@@ -4,7 +4,8 @@ import Sidebar from './Sidebar';
 import Chatarea from './Chatarea';
 import Welcome from './Welcome';
 import CreateGroup from './CreateGroup';
-import User_Groups from './User_Groups';
+import User_Groups from './Users';
+import { Outlet } from 'react-router-dom';
 
 
 
@@ -21,10 +22,7 @@ const MainContainer = () => {
   return (
     <div className='maincnt'>
       <Sidebar/> 
-      {/* <Chatarea props={header}/> */}
-      {/* <Welcome/> */}
-      {/* <CreateGroup/> */}
-      <User_Groups/>
+      <Outlet/>
     </div>
   )
 }
