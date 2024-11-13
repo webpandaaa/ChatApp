@@ -8,7 +8,7 @@ const Groups = () => {
     <div className="list-container">
       <div className="ug-header">
         <img
-          src="/public/images/liveChat.png"
+          src="/images/liveChat.png"
           alt=""
           style={{ height: "2rem", width: "2rem" }}
         />
@@ -23,35 +23,35 @@ const Groups = () => {
       <div className="ug-list">
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
         <div className="list-item">
           <p className="con-icon">T</p>
-          <p className="con-title">Test User</p>
+          <p className="con-title">Test Group</p>
         </div>
       </div>
     </div>

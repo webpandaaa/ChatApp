@@ -8,7 +8,7 @@ const Users = () => {
     <div className="list-container">
       <div className="ug-header">
         <img
-          src="/public/images/liveChat.png"
+          src="/images/liveChat.png"
           alt=""
           style={{ height: "2rem", width: "2rem" }}
         />
