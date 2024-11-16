@@ -129,20 +129,20 @@
   
 
 .chatArea-cnt{
-    flex: 0.7;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  flex: 0.7;
 }
 
 .chatArea-header{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: white;
-    padding: 10px 10px;
-    margin: 10px;
-    border-radius: 20px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 10px 10px;
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
@@ -357,4 +357,44 @@
 
 .list-item:hover{
   background-color: #f0f0f0;
+}
+
+@media only screen and (max-width: 40em) {
+  .sb-search{
+    display: none;
+  }
+
+  .sb-conversations{
+    display: none;
+  }
+
+  .sidebar{
+    flex-direction: column;
+    
+  }
+
+  .sb-header{
+    flex-direction: column;
+    width: min-content;
+    padding: 10px 6px;
+    flex: 1;
+    gap: 30px;
+    justify-content: start;
+  }
+
+  .sidebar {
+    flex: 0;
+  }
+
+  .maincnt{
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .other-icons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
 }

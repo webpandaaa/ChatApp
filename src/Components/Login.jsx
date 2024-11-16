@@ -5,7 +5,7 @@ const Login = () => {
   return (
     <div className='login-container'>
       <div className='image-container'>
-            <img src="/public/images/liveChat.png" alt="" className='welcome-logo' />
+            <img src="/images/liveChat.png" alt="" className='welcome-logo' />
       </div>
       <div className='login-box'>
         <p className='login-text'>Login to Your Account</p>
