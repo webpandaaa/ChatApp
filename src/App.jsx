@@ -8,6 +8,7 @@ import Chatarea from './Components/Chatarea'
 import CreateGroup from './Components/CreateGroup'
 import Groups from './Components/Groups'
 import Users from './Components/Users'
+import "react-toastify/dist/ReactToastify.css";
 
 
 const App = () => {

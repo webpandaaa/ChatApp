@@ -307,6 +307,10 @@
   gap: 30px;
 }
 
+.hyper{
+  cursor: pointer;
+}
+
 .list-container {
   flex: 0.7;
   display: flex;
