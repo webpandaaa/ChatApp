@@ -21,7 +21,7 @@ function Sidebar() {
   const lightTheme = useSelector((state) => state.themeKey);
   // const refresh = useSelector((state) => state.refreshKey);
   const { refresh, setRefresh } = useContext(myContext);
-  console.log("Context API : refresh : ", refresh);
+  // console.log("Context API : refresh : ", refresh);
   const [conversations, setConversations] = useState([]);
   // console.log("Conversations of Sidebar : ", conversations);
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -41,8 +41,8 @@ function Sidebar() {
       },
     };
 
-    axios.get("http://localhost:8080/chat/", config).then((response) => {
-      console.log("Data refresh in sidebar ", response.data);
+    axios.get("http://localhost:5000/chat/", config).then((response) => {
+      // console.log("Data refresh in sidebar ", response.data);
       setConversations(response.data);
       // setRefresh(!refresh);
     });
@@ -60,6 +60,7 @@ function Sidebar() {
             <AccountCircleIcon
               className={"icon" + (lightTheme ? "" : " dark")}
             />
+            <h6>{user?.name || "User"}</h6>
           </IconButton>
 
           <IconButton

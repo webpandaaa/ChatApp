@@ -4,7 +4,7 @@ import { IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import MessageSelf from "./MessageSelf";
 import MessageOthers from "./MessageOthers";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
@@ -15,53 +15,61 @@ function ChatArea() {
   const [messageContent, setMessageContent] = useState("");
   const messagesEndRef = useRef(null);
   const dyParams = useParams();
-  const [chat_id, chat_user] = dyParams._id.split("&");
-  // console.log(chat_id, chat_user);
+  const [chat_id, chat_user] = dyParams._id
+    ? dyParams._id.split("&")
+    : [null, null]; // Safely handle undefined _id
+
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
-  // console.log("Chat area id : ", chat_id._id);
-  // const refresh = useSelector((state) => state.refreshKey);
   const { refresh, setRefresh } = useContext(myContext);
-  const [loaded, setloaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  if (!chat_id || !chat_user) {
+    console.error("Error: Chat ID or user is missing!");
+    return <div>Error: Chat ID or user is missing!</div>;
+  }
+
   const sendMessage = () => {
-    // console.log("SendMessage Fired to", chat_id._id);
+    if (!messageContent.trim()) return;
+
     const config = {
       headers: {
-        Authorization: `Bearer ${userData.data.token}`,
+        Authorization: `Bearer ${userData?.data?.token}`,
       },
     };
+
     axios
       .post(
-        "http://localhost:8080/message/",
+        "http://localhost:5000/message/",
         {
           content: messageContent,
           chatId: chat_id,
         },
         config
       )
-      .then(({ data }) => {
-        console.log("Message Fired");
+      .then((response) => {
+        setMessageContent(""); // Clear the message input
+        setRefresh(!refresh); // Trigger a refresh
+      })
+      .catch((err) => {
+        console.error("Error sending message:", err);
       });
   };
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
 
   useEffect(() => {
-    console.log("Users refreshed");
     const config = {
       headers: {
         Authorization: `Bearer ${userData.data.token}`,
       },
     };
     axios
-      .get("http://localhost:8080/message/" + chat_id, config)
+      .get(`http://localhost:5000/message/${chat_id}`, config)
       .then(({ data }) => {
         setAllMessages(data);
-        setloaded(true);
-        // console.log("Data from Acess Chat API ", data);
-      });
-    // scrollToBottom();
+        setLoaded(true);
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      })
+      .catch((err) => console.error("Error fetching messages:", err));
   }, [refresh, chat_id, userData.data.token]);
 
   if (!loaded) {
@@ -107,9 +115,6 @@ function ChatArea() {
             <p className={"con-title" + (lightTheme ? "" : " dark")}>
               {chat_user}
             </p>
-            {/* <p className={"con-timeStamp" + (lightTheme ? "" : " dark")}>
-              {props.timeStamp}
-            </p> */}
           </div>
           <IconButton className={"icon" + (lightTheme ? "" : " dark")}>
             <DeleteIcon />
@@ -123,10 +128,8 @@ function ChatArea() {
               const sender = message.sender;
               const self_id = userData.data._id;
               if (sender._id === self_id) {
-                // console.log("I sent it ");
                 return <MessageSelf props={message} key={index} />;
               } else {
-                // console.log("Someone Sent it");
                 return <MessageOthers props={message} key={index} />;
               }
             })}
@@ -141,20 +144,14 @@ function ChatArea() {
               setMessageContent(e.target.value);
             }}
             onKeyDown={(event) => {
-              if (event.code == "Enter") {
-                // console.log(event);
+              if (event.code === "Enter") {
                 sendMessage();
-                setMessageContent("");
-                setRefresh(!refresh);
               }
             }}
           />
           <IconButton
             className={"icon" + (lightTheme ? "" : " dark")}
-            onClick={() => {
-              sendMessage();
-              setRefresh(!refresh);
-            }}
+            onClick={sendMessage}
           >
             <SendIcon />
           </IconButton>
