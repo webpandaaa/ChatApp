@@ -3,7 +3,7 @@ import "./mystyle.css";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import logo from "/images/liveChat.png";
+import logo from "../../public/images/liveChat.png";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
@@ -12,11 +12,13 @@ import { refreshSidebarFun } from "../Features/refreshSidebar";
 import { myContext } from "./MainContainer";
 
 function Users() {
+  // const [refresh, setRefresh] = useState(true);
   const { refresh, setRefresh } = useContext(myContext);
 
   const lightTheme = useSelector((state) => state.themeKey);
   const [users, setUsers] = useState([]);
   const userData = JSON.parse(localStorage.getItem("userData"));
+  // console.log("Data from LocalStorage : ", userData);
   const nav = useNavigate();
   const dispatch = useDispatch();
 
@@ -86,22 +88,24 @@ function Users() {
                 key={index}
                 onClick={() => {
                   console.log("Creating chat with ", user.name);
-                  // const config = {
-                  //   headers: {
-                  //     Authorization: `Bearer ${userData.data.token}`,
-                  //   },
-                  // };
-                  // axios.post(
-                  //   "http://localhost:5000/chat/",
-                  //   {
-                  //     userId: user._id,
-                  //   },
-                  //   config
-                  // );
+                  const config = {
+                    headers: {
+                      Authorization: `Bearer ${userData.data.token}`,
+                    },
+                  };
+                  axios.post(
+                    "http://localhost:5000/chat/",
+                    {
+                      userId: user._id,
+                    },
+                    config
+                  );
+                  console.log(users);
+                  nav(`chat/${user._id}&${user.name}`);
                   dispatch(refreshSidebarFun());
                 }}
               >
-                <p className={"con-icon" + (lightTheme ? "" : " dark")}>{user.name[0]}</p>
+                <p className={"con-icon" + (lightTheme ? "" : " dark")}>T</p>
                 <p className={"con-title" + (lightTheme ? "" : " dark")}>
                   {user.name}
                 </p>
