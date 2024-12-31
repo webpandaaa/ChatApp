@@ -60,7 +60,7 @@ function Sidebar() {
             <AccountCircleIcon
               className={"icon" + (lightTheme ? "" : " dark")}
             />
-            <h6>{user?.name || "User"}</h6>
+            <h6>{user?.name.toCapitalize || "User"}</h6>
           </IconButton>
 
           <IconButton
