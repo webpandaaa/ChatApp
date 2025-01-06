@@ -9,7 +9,11 @@ import { useParams } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
 import { myContext } from "./MainContainer";
+import io from "socket.io-client";
 
+const ENDPOINT = "http://localhost:8080";
+
+var socker , chat;
 function ChatArea() {
   const lightTheme = useSelector((state) => state.themeKey);
   const [messageContent, setMessageContent] = useState("");
@@ -21,15 +25,19 @@ function ChatArea() {
 
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
+  const [allMessagesCopy, setAllMessagesCopy] = useState([]);
+
   const { refresh, setRefresh } = useContext(myContext);
   const [loaded, setLoaded] = useState(false);
+  const [socketConnectionStatus, setSocketConnectionStatus] = useState(false);
 
-  if (!chat_id || !chat_user) {
-    console.error("Error: Chat ID or user is missing!");
-    return <div>Error: Chat ID or user is missing!</div>;
-  }
+  // if (!chat_id || !chat_user) {
+  //   console.error("Error: Chat ID or user is missing!");
+  //   return <div>Error: Chat ID or user is missing!</div>;
+  // }
 
   const sendMessage = () => {
+    var data = null;
     if (!messageContent.trim()) return;
 
     const config = {
