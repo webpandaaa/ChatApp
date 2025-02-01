@@ -1,6 +1,10 @@
 .dark {
   background-color: #2d3941 !important;
   color: lightgray !important;
+  
+}
+.line{
+  border : 1px solid #D3D3D3;
 }
 
 .icon {
@@ -14,6 +18,7 @@
   width: 90vw;
   display: flex;
   border-radius: 20px;
+  overflow: hidden;
 }
 
 .sidebar-container {
@@ -46,6 +51,10 @@
   align-items: center;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.sb-search:hover{
+  border: 1px solid #D3D3D3;
 }
 
 textarea:focus,
@@ -82,9 +91,13 @@ input:focus {
   border-radius: 10px;
   box-sizing: border-box;
 }
-.conversation-container:hover {
-  background-color: #d9d9d9;
+
+#forHover:hover {
+  border: 1px solid #D3D3D3;
 }
+
+
+
 
 
 .con-icon {
@@ -386,5 +399,42 @@ input:focus {
   .main-container {
     height: 100vh;
     width: 100vw;
+    border-radius: 0px;
+  }
+  .welcome-container {
+    flex: 1;
+  }
+  .list-container {
+    flex: 1;
+  }
+
+  .createGroups-container {
+    flex: 1;
   }
 }
+
+@media (max-width : 600px)  {
+  
+  .login-container {
+    height: 90vh;
+    width: 90vw;
+    background-color: #f4f5f8;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+  
+    .image-container img {
+      object-fit: cover;
+      width: 20vh;
+      height: 20vh;
+    }
+  
+    .login-text {
+      font-size: 5vw;
+      padding-bottom: 15px;
+    }
+  
+  
+  }

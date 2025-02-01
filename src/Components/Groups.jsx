@@ -55,7 +55,7 @@ function Groups() {
         }}
         className="list-container"
       >
-        <div className={"ug-header" + (lightTheme ? "" : " dark")}>
+        <div className={"ug-header" + (lightTheme ? "" : " dark line")}>
           <img
             src={logo}
             style={{ height: "2rem", width: "2rem", marginLeft: "10px" }}

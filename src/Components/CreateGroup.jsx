@@ -87,7 +87,7 @@ function CreateGroups() {
           </DialogActions>
         </Dialog>
       </div>
-      <div className={"createGroups-container" + (lightTheme ? "" : " dark")}>
+      <div className={"createGroups-container" + (lightTheme ? "" : " dark line")}>
         <input
           placeholder="Enter Group Name"
           className={"search-box" + (lightTheme ? "" : " dark")}

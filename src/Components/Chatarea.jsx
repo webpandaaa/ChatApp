@@ -11,9 +11,8 @@ import axios from "axios";
 import { myContext } from "./MainContainer";
 import io from "socket.io-client";
 
-const ENDPOINT = "http://localhost:8080";
+const ENDPOINT = "http://localhost:5000";
 
-var socker , chat;
 function ChatArea() {
   const lightTheme = useSelector((state) => state.themeKey);
   const [messageContent, setMessageContent] = useState("");
@@ -26,18 +25,13 @@ function ChatArea() {
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
   const [allMessagesCopy, setAllMessagesCopy] = useState([]);
-
   const { refresh, setRefresh } = useContext(myContext);
   const [loaded, setLoaded] = useState(false);
   const [socketConnectionStatus, setSocketConnectionStatus] = useState(false);
 
-  // if (!chat_id || !chat_user) {
-  //   console.error("Error: Chat ID or user is missing!");
-  //   return <div>Error: Chat ID or user is missing!</div>;
-  // }
+  const socket = useRef(null); // Use useRef to hold the socket instance
 
   const sendMessage = () => {
-    var data = null;
     if (!messageContent.trim()) return;
 
     const config = {
@@ -55,15 +49,41 @@ function ChatArea() {
         },
         config
       )
-      .then((response) => {
+      .then(({ data }) => {
+        console.log("Message sent to server");
         setMessageContent(""); // Clear the message input
         setRefresh(!refresh); // Trigger a refresh
-      })
-      .catch((err) => {
-        console.error("Error sending message:", err);
+        socket.current.emit("newMessage", data); // Emit the message via socket
       });
   };
 
+  // Connect to socket
+  useEffect(() => {
+    socket.current = io(ENDPOINT); // Initialize socket connection
+    socket.current.emit("setup", userData);
+
+    socket.current.on("connected", () => {
+      setSocketConnectionStatus(true);
+      // console.log("Socket connected");
+    });
+
+    return () => {
+      socket.current.disconnect(); // Cleanup on unmount
+    };
+  }, [userData]);
+
+  // New message received
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("message received", (newMessage) => {
+        if (!allMessagesCopy || allMessagesCopy._id !== newMessage._id) {
+          setAllMessages((prevMessages) => [...prevMessages, newMessage]);
+        }
+      });
+    }
+  }, [allMessagesCopy]);
+
+  // Fetch chats
   useEffect(() => {
     const config = {
       headers: {
@@ -75,10 +95,10 @@ function ChatArea() {
       .then(({ data }) => {
         setAllMessages(data);
         setLoaded(true);
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      })
-      .catch((err) => console.error("Error fetching messages:", err));
-  }, [refresh, chat_id, userData.data.token]);
+        socket.current.emit("join chat", chat_id);
+      });
+    setAllMessagesCopy(allMessages);
+  }, [refresh, chat_id, userData.data.token, allMessages]);
 
   if (!loaded) {
     return (
@@ -115,7 +135,7 @@ function ChatArea() {
   } else {
     return (
       <div className={"chatArea-container" + (lightTheme ? "" : " dark")}>
-        <div className={"chatArea-header" + (lightTheme ? "" : " dark")}>
+        <div className={"chatArea-header" + (lightTheme ? "" : " dark line")}>
           <p className={"con-icon" + (lightTheme ? "" : " dark")}>
             {chat_user[0]}
           </p>
@@ -143,7 +163,7 @@ function ChatArea() {
             })}
         </div>
         <div ref={messagesEndRef} className="BOTTOM" />
-        <div className={"text-input-area" + (lightTheme ? "" : " dark")}>
+        <div className={"text-input-area" + (lightTheme ? "" : " dark line")}>
           <input
             placeholder="Type a Message"
             className={"search-box" + (lightTheme ? "" : " dark")}

@@ -52,7 +52,7 @@ function Users() {
         }}
         className="list-container"
       >
-        <div className={"ug-header" + (lightTheme ? "" : " dark")}>
+        <div className={"ug-header" + (lightTheme ? "" : " dark line")}>
           <img
             src={logo}
             style={{ height: "2rem", width: "2rem", marginLeft: "10px" }}
@@ -84,7 +84,7 @@ function Users() {
               <motion.div
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
-                className={"list-tem" + (lightTheme ? "" : " dark")}
+                className={"list-tem" + (lightTheme ? "" : " dark line")}
                 key={index}
                 onClick={() => {
                   console.log("Creating chat with ", user.name);
